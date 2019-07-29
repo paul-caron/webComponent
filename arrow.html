@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Custom Web Components</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+</head>
+<body>
+<h1>My arrow block</h1>
+<arrow-block>arrow number 1</arrow-block>
+<arrow-block>arrow number 2</arrow-block>
+<script>
+//test
+console.log("v1 custom elements support:"+('customElements' in window));
+</script>
+
+
+</body>
+</html>
+<!--
+:):):):):):):):):):):):):):):):):):):):):)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+~~~~~~~~~~~~~~~~~~~~~chillzone~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+:):):):):):):):):):):):):):):):):):):):):)
+-->
+<template id="arrow-block">
+<table>
+<tr><td id="arrow"></td><td id="slot"><slot></slot></td></tr>
+</table>
+<style>
+#arrow::before{
+    content:"➯";
+    animation : 1s anim infinite;
+}
+
+#arrow{
+    width :10vw;
+}
+table,tr,td{
+    width:fit-content;
+}
+
+@keyframes anim{
+    0%{content:"➯";}
+    25%{content:"➱";}
+    50%{content:"➬";}
+    75%{content:"➫";}
+}
+</style>
+</template>
+<script>
+const template = document.querySelector('#arrow-block');
+customElements.define('arrow-block',
+  class extends HTMLElement {
+    constructor() {
+      super();
+      const root = this.attachShadow({mode: 'closed'});
+      const temp = template.content.cloneNode(true);
+      root.appendChild(temp);
+    }
+    connectedCallback() {
+      
+    }
+  }
+);
+</script>
+
+
+
+
